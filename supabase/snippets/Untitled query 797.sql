@@ -1,0 +1,2 @@
+
+drop function handle_new_user
