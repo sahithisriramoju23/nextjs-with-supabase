@@ -1,9 +1,41 @@
 import { NextLogo } from "./next-logo";
 import { SupabaseLogo } from "./supabase-logo";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import Image from "next/image";
+import carouselImage from '../app/twitter-image.png';
 
 export function Hero() {
   return (
-    <div className="flex flex-col gap-16 items-center">
+      <Carousel opts={{ align: "center", loop: true, containScroll: false }}
+        className="w-screen">
+        <CarouselContent>
+          <CarouselItem>
+            <div className="relative aspect-video w-full overflow-hidden">
+              <Image src={carouselImage} alt="carousel image" placeholder="blur" fill sizes="100vw" className="object-cover"></Image>
+            </div>
+          </CarouselItem>
+          <CarouselItem>
+            <div className="relative aspect-video w-full overflow-hidden">
+              <Image src={carouselImage} alt="carousel image" placeholder="blur" fill sizes="100vw" className="object-cover"></Image>
+            </div>
+          </CarouselItem>
+          <CarouselItem>
+              <div className="relative aspect-video w-full overflow-hidden">
+              <Image src={carouselImage} alt="carousel image" placeholder="blur" fill sizes="100vw" className="object-cover"></Image>
+            </div>
+          </CarouselItem>
+        </CarouselContent>
+        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2" />
+        <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2" />
+      </Carousel>
+
+    /*<div className="flex flex-col gap-16 items-center">
       <div className="flex gap-8 justify-center items-center">
         <a
           href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
@@ -39,6 +71,6 @@ export function Hero() {
         </a>
       </p>
       <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-8" />
-    </div>
+    </div>*/
   );
 }

@@ -21,6 +21,8 @@ export function SignUpForm({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const [email, setEmail] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -43,12 +45,20 @@ export function SignUpForm({
       const { error } = await supabase.auth.signUp({
         email,
         password,
+        phone: phoneNumber,
         options: {
           emailRedirectTo: `${window.location.origin}/protected`,
+          data:{
+            display_name: fullName,
+            role: 'devotee',
+            phone: phoneNumber
+          }
         },
       });
       if (error) throw error;
       router.push("/auth/sign-up-success");
+
+      
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
@@ -75,6 +85,29 @@ export function SignUpForm({
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="email">Phone Number</Label>
+                <Input
+                  id="phoneNumber"
+                  type="tel"
+                  pattern="[0-9]{10}"
+                  placeholder="91-8765432190"
+                  required
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+              </div>
+               <div className="grid gap-2">
+                <Label htmlFor="fullName">Full Name</Label>
+                <Input
+                  id="fullName"
+                  type="name"
+                  placeholder="Radha Krishna"
+                  required
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
                 />
               </div>
               <div className="grid gap-2">
